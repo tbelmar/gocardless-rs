@@ -1,3 +1,28 @@
+/// # example-02
+///
+/// This package demonstrates how to interact with the GoCardless API using the unofficial GoCardless client.
+///
+/// # Dependencies
+///
+/// * `gocardless-unofficial`: This is the unofficial GoCardless client that is used to interact with the GoCardless API.
+/// * `tokio`: This is used to provide an async runtime.
+///
+/// # Usage
+///
+/// To run this example, navigate to the `example-02` directory and run `cargo run`.
+///
+/// This will:
+/// * Retrieve a list of requisitions
+/// * Find a linked requisition from the list
+/// * Retrieve the account ID associated with the linked requisition
+/// * Retrieve the balances for the account
+/// * Retrieve the details for the account
+/// * Retrieve the transactions for the account
+///
+/// The results will be printed to the console.
+///
+/// Please note that you will need to replace the `GOCARDLESS_SECRET_ID` and `GOCARDLESS_SECRET_KEY` environment variables with your own GoCardless API credentials.
+
 use gocardless_unofficial::Client;
 
 #[tokio::main]

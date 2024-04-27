@@ -1,6 +1,6 @@
 [package]
 name = "gocardless-unofficial"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Joe Burnard <github.com/ducc>"]
 rust-version = "1.63.0"
