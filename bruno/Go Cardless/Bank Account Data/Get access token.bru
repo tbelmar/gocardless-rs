@@ -1,0 +1,28 @@
+meta {
+  name: Get access token
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://bankaccountdata.gocardless.com/api/v2/token/new/
+  body: json
+  auth: none
+}
+
+headers {
+  accept: application/json
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "secret_id": "{{GOCARDLESS_SECRET_ID}}",
+    "secret_key": "{{GOCARDLESS_SECRET_KEY}}"
+  }
+}
+
+script:post-response {
+  bru.setVar("ACCESS_TOKEN", res.body.access)
+  bru.setVar("REFRESH_TOKEN", res.body.refresh)
+}

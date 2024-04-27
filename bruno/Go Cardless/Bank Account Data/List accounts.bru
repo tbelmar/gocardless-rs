@@ -1,0 +1,16 @@
+meta {
+  name: List accounts
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://bankaccountdata.gocardless.com/api/v2/requisitions/
+  body: none
+  auth: none
+}
+
+headers {
+  accept: application/json
+  Authorization: Bearer {{ACCESS_TOKEN}}
+}

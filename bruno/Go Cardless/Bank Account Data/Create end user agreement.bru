@@ -1,0 +1,34 @@
+meta {
+  name: Create end user agreement
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://bankaccountdata.gocardless.com/api/v2/agreements/enduser/
+  body: json
+  auth: none
+}
+
+headers {
+  accept: application/json
+  Content-Type: application/json
+  Authorization: Bearer {{ACCESS_TOKEN}}
+}
+
+body:json {
+  {
+    "institution_id": "{{INSTITUTION_ID}}",
+    "max_historical_days": "180",
+    "access_valid_for_days": "30",
+    "access_scope": [
+      "balances",
+      "details",
+      "transactions"
+    ]
+  }
+}
+
+vars:pre-request {
+  INSTITUTION_ID: 
+}

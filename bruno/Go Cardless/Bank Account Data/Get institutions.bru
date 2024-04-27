@@ -1,0 +1,20 @@
+meta {
+  name: Get institutions
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://bankaccountdata.gocardless.com/api/v2/institutions/?country=gb
+  body: none
+  auth: none
+}
+
+query {
+  country: gb
+}
+
+headers {
+  accept: application/json
+  Authorization: Bearer {{ACCESS_TOKEN}}
+}
