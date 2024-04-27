@@ -10,7 +10,7 @@
 //! Add the following to `Cargo.toml`
 //! ```toml
 //! [dependencies]
-//! gocardless-unofficial = "0.1.0"
+//! gocardless-unofficial = "0.1"
 //! ```
 //! 
 //! ```rs
