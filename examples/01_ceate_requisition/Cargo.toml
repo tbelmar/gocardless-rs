@@ -1,0 +1,9 @@
+[package]
+name = "example-01-create-requisition"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+gocardless-unofficial = { path = "../../" }
+nanoid = "0.4.0"
+tokio = { version = "1.37.0", features = ["full"] }
