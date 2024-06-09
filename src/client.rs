@@ -11,13 +11,13 @@ const URL_CREATE_END_USER_AGREEMENT: &str =
 const URL_REQUISITIONS: &str = "https://bankaccountdata.gocardless.com/api/v2/requisitions/";
 
 /// `Client` is a public struct that represents a client for making requests to the API.
-/// 
+///
 /// Fields:
 /// * `req_client`: A `reqwest::Client` instance used for making HTTP requests.
 /// * `secret_id`: A `SecretString` that represents the client's secret ID.
 /// * `secret_key`: A `SecretString` that represents the client's secret key.
 /// * `created_token`: An `Option<CreateTokenResponse>` that represents the token created by the client. It is `None` if no token has been created yet.
-/// 
+///
 /// The `Client` struct is used to interact with the API. It uses the `reqwest` crate for making HTTP requests and the `secrecy` crate for handling secret strings.
 /// The `secret_id` and `secret_key` are used for authentication with the API.
 /// The `created_token` field is used to store the token received from the API after successful authentication.
@@ -175,16 +175,17 @@ impl Client {
     pub async fn create_end_user_agreement(
         &self,
         institution_id: &str,
+        max_historical_days: i32,
     ) -> Result<EndUserAgreement, Box<dyn std::error::Error>> {
         let access_token = self.created_token.clone().unwrap().access;
 
-        let response: EndUserAgreement = self
+        let response = self
             .req_client
             .post(URL_CREATE_END_USER_AGREEMENT)
             .body(
                 json!({
                     "institution_id": institution_id,
-                    "max_historical_days": "180",
+                    "max_historical_days": max_historical_days,
                     "access_valid_for_days": "30",
                     "access_scope": [
                         "balances",
@@ -199,10 +200,12 @@ impl Client {
             .header("Authorization", format!("Bearer {}", access_token))
             .send()
             .await?
-            .json()
+            .text()
             .await?;
 
-        Ok(response)
+        let agreement: EndUserAgreement = serde_json::from_str(&response)?;
+
+        Ok(agreement)
     }
 
     /// `list_requisitions` is an async method that sends a GET request to the `URL_REQUISITIONS` endpoint to retrieve a list of requisitions.
@@ -338,7 +341,7 @@ impl Client {
     ) -> Result<ListTransactionsResponse, Box<dyn std::error::Error>> {
         let access_token = self.created_token.clone().unwrap().access;
 
-        let response: ListTransactionsResponse = self
+        let response = self
             .req_client
             .get(format!(
                 "https://bankaccountdata.gocardless.com/api/v2/accounts/{}/transactions",
@@ -348,10 +351,12 @@ impl Client {
             .header("Authorization", format!("Bearer {}", access_token))
             .send()
             .await?
-            .json()
+            .text()
             .await?;
 
-        Ok(response)
+        let parsed: ListTransactionsResponse = serde_json::from_str(&response)?;
+
+        Ok(parsed)
     }
 
     /// `list_balances` is an async method that sends a GET request to the `https://bankaccountdata.gocardless.com/api/v2/accounts/{account_id}/balances` endpoint to retrieve a list of balances for a specific account.

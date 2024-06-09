@@ -72,6 +72,7 @@ pub struct Requisition {
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListTransactionsResponse {
+    #[serde(default)]
     pub transactions: Transactions,
 }
 
@@ -87,18 +88,19 @@ pub struct Transactions {
 pub struct Transaction {
     pub transaction_id: String,
     pub booking_date: String,
-    pub value_date: String,
+    pub value_date: Option<String>,
     pub booking_date_time: String,
-    pub value_date_time: String,
+    pub value_date_time: Option<String>,
     pub transaction_amount: TransactionAmount,
     pub creditor_name: Option<String>,
     pub remittance_information_unstructured: Option<String>,
-    pub proprietary_bank_transaction_code: String,
+    pub proprietary_bank_transaction_code: Option<String>,
     pub internal_transaction_id: Option<String>,
     pub debtor_name: Option<String>,
     pub creditor_account: Option<CreditorAccount>,
-    #[serde(default)]
-    pub currency_exchange: Vec<CurrencyExchange>,
+    // TODO: this field is either an array of objects or just a single object.
+    //       perhaps there is a way in serde to default to array of just 1 object?
+    // pub currency_exchange: Vec<CurrencyExchange>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -126,6 +128,7 @@ pub struct CurrencyExchange {
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListBalancesResponse {
+    #[serde(default)]
     pub balances: Vec<Balance>,
 }
 
@@ -147,19 +150,20 @@ pub struct BalanceAmount {
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AccountDetailsResponse {
-    pub account: Account,
+    #[serde(default)]
+    pub account: Option<Account>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Account {
     pub resource_id: String,
-    pub iban: String,
-    pub bban: String,
+    pub iban: Option<String>,
+    pub bban: Option<String>,
     pub currency: String,
-    pub owner_name: String,
-    pub name: String,
+    pub owner_name: Option<String>,
+    pub name: Option<String>,
     pub cash_account_type: String,
     pub status: String,
-    pub masked_pan: String,
+    pub masked_pan: Option<String>,
 }

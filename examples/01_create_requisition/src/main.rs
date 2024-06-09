@@ -15,7 +15,7 @@
 /// This will create a new requisition and print the details to the console.
 ///
 /// Please note that you will need to replace the `secret_id` and `secret_key` in the `main.rs` file with your own GoCardless API credentials.
-/// 
+///
 use gocardless_unofficial::Client;
 
 #[tokio::main]
@@ -34,9 +34,11 @@ pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .unwrap();
     dbg!(&starling_bank);
 
-    let end_user_agreement = client.create_end_user_agreement(&starling_bank.id).await?;
+    let end_user_agreement = client
+        .create_end_user_agreement(&starling_bank.id, 180)
+        .await?;
     dbg!(&end_user_agreement);
-    
+
     let reference = nanoid::nanoid!();
     dbg!(&reference);
 
