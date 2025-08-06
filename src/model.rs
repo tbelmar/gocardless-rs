@@ -110,7 +110,7 @@ pub struct Transaction {
     pub transaction_id: String,
     pub booking_date: String,
     pub value_date: Option<String>,
-    pub booking_date_time: String,
+    pub booking_date_time: Option<String>,
     pub value_date_time: Option<String>,
     pub transaction_amount: TransactionAmount,
     pub creditor_name: Option<String>,
