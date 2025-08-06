@@ -158,7 +158,7 @@ pub struct ListBalancesResponse {
 pub struct Balance {
     pub balance_amount: BalanceAmount,
     pub balance_type: String,
-    pub reference_date: String,
+    pub reference_date: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
