@@ -126,7 +126,7 @@ impl Client {
     /// let secret_id = "my_secret_id".to_string();
     /// let secret_key = "my_secret_key".to_string();
     /// let mut client = Client::new(secret_id, secret_key).await?;
-    /// let institutions = client.get_institutions().await?;
+    /// let institutions = client.get_institutions("gb").await?;
     /// ```
     ///
     /// This method requires that a token has been created and stored in the `created_token` field of the `Client` struct. If no token has been created, this method will return an error.

@@ -25,7 +25,7 @@ pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let client = Client::new(secret_id, secret_key).await?;
 
-    let institutions = client.get_institutions().await?;
+    let institutions = client.get_institutions("gb").await?;
     dbg!(&institutions);
 
     let starling_bank = institutions
