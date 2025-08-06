@@ -4,8 +4,7 @@ use serde_json::json;
 use crate::model::*;
 
 const URL_CREATE_TOKEN: &str = "https://bankaccountdata.gocardless.com/api/v2/token/new/";
-const URL_GET_INSTITUTIONS: &str =
-    "https://bankaccountdata.gocardless.com/api/v2/institutions/?country=gb"; // TODO: make country a variable
+const URL_GET_INSTITUTIONS: &str = "https://bankaccountdata.gocardless.com/api/v2/institutions/";
 const URL_CREATE_END_USER_AGREEMENT: &str =
     "https://bankaccountdata.gocardless.com/api/v2/agreements/enduser/";
 const URL_REQUISITIONS: &str = "https://bankaccountdata.gocardless.com/api/v2/requisitions/";
@@ -131,12 +130,15 @@ impl Client {
     /// ```
     ///
     /// This method requires that a token has been created and stored in the `created_token` field of the `Client` struct. If no token has been created, this method will return an error.
-    pub async fn get_institutions(&self) -> Result<Vec<Institution>, Box<dyn std::error::Error>> {
+    pub async fn get_institutions(
+        &self,
+        country: &str,
+    ) -> Result<Vec<Institution>, Box<dyn std::error::Error>> {
         let access_token = self.created_token.clone().unwrap().access;
 
         let response: Vec<Institution> = self
             .req_client
-            .get(URL_GET_INSTITUTIONS)
+            .get(format!("{URL_GET_INSTITUTIONS}?country={}", country))
             .header("Accept", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
             .send()
