@@ -26,8 +26,6 @@ pub struct Institution {
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct EndUserAgreement {
-    pub id: String,
-    pub created: String,
     #[serde(rename = "institution_id")]
     pub institution_id: String,
     #[serde(rename = "max_historical_days")]
