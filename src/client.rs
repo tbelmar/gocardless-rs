@@ -188,7 +188,7 @@ impl Client {
                 json!({
                     "institution_id": institution_id,
                     "max_historical_days": max_historical_days,
-                    "access_valid_for_days": "30",
+                    "access_valid_for_days": 30,
                     "access_scope": [
                         "balances",
                         "details",
