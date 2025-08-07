@@ -180,14 +180,13 @@ impl Client {
         max_historical_days: i32,
     ) -> Result<EndUserAgreement, Box<dyn std::error::Error>> {
         let access_token = self.created_token.clone().unwrap().access;
-        println!("Yargh.");
 
         let response = self
             .req_client
             .post(URL_CREATE_END_USER_AGREEMENT)
             .json(
                 &json!({
-                    "institution_id": institution_id,
+                    "id": institution_id,
                     "max_historical_days": max_historical_days,
                     "access_valid_for_days": 30,
                     "access_scope": [
