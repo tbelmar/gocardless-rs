@@ -26,14 +26,16 @@ pub struct Institution {
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct EndUserAgreement {
+    pub id: Option<String>,
+    pub created: Option<String>,
     #[serde(rename = "institution_id")]
     pub institution_id: String,
     #[serde(rename = "max_historical_days")]
-    pub max_historical_days: i64,
+    pub max_historical_days: Option<i64>,
     #[serde(rename = "access_valid_for_days")]
-    pub access_valid_for_days: i64,
+    pub access_valid_for_days: Option<i64>,
     #[serde(rename = "access_scope")]
-    pub access_scope: Vec<String>,
+    pub access_scope: Option<Vec<String>>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
