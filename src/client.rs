@@ -186,7 +186,7 @@ impl Client {
             .post(URL_CREATE_END_USER_AGREEMENT)
             .json(
                 &json!({
-                    "id": institution_id,
+                    "institution_id": institution_id,
                     "max_historical_days": max_historical_days,
                     "access_valid_for_days": 30,
                     "access_scope": [
