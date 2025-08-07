@@ -180,6 +180,7 @@ impl Client {
         max_historical_days: i32,
     ) -> Result<EndUserAgreement, Box<dyn std::error::Error>> {
         let access_token = self.created_token.clone().unwrap().access;
+        println!("Yargh.");
 
         let response = self
             .req_client
